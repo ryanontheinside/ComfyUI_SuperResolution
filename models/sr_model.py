@@ -130,8 +130,19 @@ class SuperResolutionModel:
             
         # Load model using OpenCV DNN Super Resolution with the correct method
         try:
-            # This is the method that works with OpenCV 4.8.1
-            self.model = cv2.dnn_superres.DnnSuperResImpl_create()
+            # Try different methods to create the DNN SuperRes object for cross-platform compatibility
+            # This handles differences between Windows and Linux OpenCV builds
+            try:
+                # Method 1: Windows-style API (most common)
+                self.model = cv2.dnn_superres.DnnSuperResImpl_create()
+            except AttributeError:
+                try:
+                    # Method 2: More generic constructor if available
+                    self.model = cv2.dnn_superres.SuperResolution_create()
+                except AttributeError:
+                    # Method 3: Direct class instantiation if available
+                    self.model = cv2.dnn_superres.DnnSuperResImpl()
+            
             self.model.readModel(model_path)
             self.model.setModel(self.config["algorithm"], self.scale_factor)
             
