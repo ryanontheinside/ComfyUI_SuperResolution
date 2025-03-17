@@ -1,0 +1,15 @@
+[project]
+name = "superresolution"
+description = "A collection of high-performance neural network-based Super Resolution models for ComfyUI."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["opencv-contrib-python>=4.8.0", "numpy", "requests"]
+
+[project.urls]
+Repository = "https://github.com/ryanontheinside/ComfyUI_SuperResolution"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI_SuperResolution"
+Icon = ""
